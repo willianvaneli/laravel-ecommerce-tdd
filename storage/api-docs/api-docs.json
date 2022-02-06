@@ -5,44 +5,28 @@
         "version": "1.0.0"
     },
     "paths": {
-        "products/{id}/create": {
+        "products/create": {
             "post": {
                 "tags": [
                     "Products"
                 ],
-                "summary": "Create products",
-                "operationId": "2bf810eaadbb2b23e710ce7787452c1c",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "operationId": "2c912b300c87a70f7226869ca0682410",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "": {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "example": "guarda roupa c225"
-                                            },
-                                            "description": {
-                                                "type": "string",
-                                                "example": "guarda roupa de casal duas portas"
-                                            },
-                                            "price": {
-                                                "type": "integer",
-                                                "example": "2000"
-                                            }
-                                        },
-                                        "type": "object"
+                                    "name": {
+                                        "type": "string",
+                                        "example": "guarda roupa c225"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "guarda roupa de casal duas portas"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "2000"
                                     }
                                 },
                                 "type": "object"
@@ -66,7 +50,20 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     },

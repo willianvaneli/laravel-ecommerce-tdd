@@ -14,41 +14,31 @@ class ProductController extends Controller
     
 
      /**
-     * Create products
+     * 
      * @OA\Post (
-     *     path="products/{id}/create",
+     *     path="products/create",
      *     tags={"Products"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="id",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                      type="object",
-     *                      @OA\Property(
-     *                          property="name",
-     *                          type="string",
-     *                          example="guarda roupa c225"
-     *                      ),
-     *                      @OA\Property(
-     *                          property="description",
-     *                          type="string",
-     *                          example="guarda roupa de casal duas portas"
-     *                      ),
-     *                      @OA\Property(
-     *                          property="price",
-     *                          type="integer",
-     *                          example="2000"
-     *                      )
-     *                 )
-     *             )
-     *          )
-     *      ),
+     *         @OA\JsonContent(
+     *           type="object",
+     *           @OA\Property(
+     *             property="name",
+     *             type="string",
+     *             example="guarda roupa c225"
+     *           ),
+     *           @OA\Property(
+     *              property="description",
+     *              type="string",
+     *              example="guarda roupa de casal duas portas"
+     *           ),
+     *           @OA\Property(
+     *              property="price",
+     *              type="integer",
+     *              example="2000"
+     *           )
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=201,
      *         description="success",
@@ -59,7 +49,7 @@ class ProductController extends Controller
      *  )
     */
     public function store(Request $request){
-
+        
         $this->validate($request, [
             'name'=> 'required|unique:products',
             'description' => 'nullable|string',
@@ -73,18 +63,27 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect('products');
+        $reponse = [
+            'status' => 201,
+            'description' => 'success',
+            [
+                'id' => $product->id
+            ]
+        ];
+
+        return $reponse;
     }
 
     public function index(Request $request){
         $products = Product::all();
-        return view('product.index', compact(['products', $products]));
+        return $products;
+        //return view('product.index', compact(['products', $products]));
     }
 
     public function show($id){
         $product = Product::findOrFail($id);
-        
-        return view('product.show', compact(['product', $product]));
+        return $product;
+        //return view('product.show', compact(['product', $product]));
     }
 
     public function edit($id){
@@ -106,14 +105,26 @@ class ProductController extends Controller
         $product->price = $request['price'];
 
         $product->save();
+        
+        $reponse = [
+            'status' => 204,
+            'description' => 'success'
+        ];
 
-        return redirect('products');
+        return $reponse;
+        //return redirect('products');
     }
 
     public function delete($id){
         $product = Product::findOrFail($id);
         $product->delete();
-        return redirect('products');
+        $reponse = [
+            'status' => 204,
+            'description' => 'success'
+        ];
+
+        return $reponse;
+        //return redirect('products');
     }
 
     public function faker(Request $request){
@@ -123,5 +134,6 @@ class ProductController extends Controller
             'status' => 201,            
         ]);
     }
+
     
 }

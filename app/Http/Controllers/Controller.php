@@ -11,6 +11,11 @@ use Illuminate\Routing\Controller as BaseController;
 * @OA\Info(
 *     title="My the best API",
 *     version="1.0.0"
+* ),
+* @OA\SecurityScheme(
+*   type="http",
+*   scheme="bearer",
+*   securityScheme="bearerAuth"
 * )
 */
 
