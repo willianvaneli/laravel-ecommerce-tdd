@@ -1,0 +1,76 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My the best API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "products/{id}/create": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create products",
+                "operationId": "2bf810eaadbb2b23e710ce7787452c1c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "guarda roupa c225"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "guarda roupa de casal duas portas"
+                                            },
+                                            "price": {
+                                                "type": "integer",
+                                                "example": "2000"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
